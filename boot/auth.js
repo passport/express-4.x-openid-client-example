@@ -4,17 +4,27 @@ const { Issuer, Strategy } = require('openid-client');
 
 module.exports = function() {
   
+  /*
   var issuer = new Issuer({
     issuer: 'https://dev-374819.oktapreview.com',
     authorization_endpoint: 'https://dev-374819.oktapreview.com/oauth2/v1/authorize',
     token_endpoint: 'https://dev-374819.oktapreview.com/oauth2/v1/token',
     jwks_uri: 'https://dev-374819.oktapreview.com/oauth2/v1/keys'
   });
+  */
+  
+  var issuer = new Issuer({
+    issuer: 'https://hansonhq.auth0.com/',
+    authorization_endpoint: 'https://hansonhq.auth0.com/authorize',
+    token_endpoint: 'https://hansonhq.auth0.com/oauth/token',
+    jwks_uri: 'https://hansonhq.auth0.com/.well-known/jwks.json'
+  });
   
   var client = new issuer.Client({
     client_id: process.env['CLIENT_ID'],
     client_secret: process.env['CLIENT_SECRET'],
-    redirect_uris: [ 'http://localhost:3000/openidconnect/redirect' ]
+    redirect_uris: [ 'http://localhost:3000/openidconnect/redirect' ],
+    id_token_signed_response_alg: 'HS256'
   });
   
   passport.use('openidconnect', new Strategy({
