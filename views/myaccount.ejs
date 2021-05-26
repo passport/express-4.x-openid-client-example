@@ -1,45 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
-
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover">
-    <title>Log in example | Passport.js</title>
-    <meta name="description" content="Express 4.x app using Passport for authentication with username and password.">
-
-     <!-- Pico.css -->
     <link rel="stylesheet" href="/stylesheets/pico.css">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <title>My Account</title>
     <style>
-      article div:nth-of-type(2) {
-        display: none;
-        background-color: #374956;
-        background-image: url("https://source.unsplash.com/QgR5pKDoCd0/1000x1200");
-        background-position: center;
-        background-size: cover;
-      }
-      @media (min-width: 992px) {
-        .grid > div:nth-of-type(2) {
-          display: block;
-        }
-      }
+:root:not([data-theme=dark]), [data-theme=light] {
+    --nav-background: rgba(255, 255, 255, 0.7);
+    --nav-border: rgba(115, 130, 140, 0.2);
+}
+
+[data-theme=dark] {
+    --nav-background: rgba(16, 24, 30, 0.8);
+    --nav-border: rgba(115, 130, 140, 0.2);
+}
+
+main .grid > * {
+  margin-bottom: var(--spacing);
+}
+@media (min-width: 992px) {
+  main .grid {
+    grid-column-gap: var(--spacing);
+    grid-template-columns: 25% auto;
+  }
+}
     </style>
   </head>
 
   <body>
+    <%- include('header'); -%>
 
     <main class="container">
-      
-      <article class="grid">
+
+      <div class="grid">
+
+        <figure>
+          <img src="/images/woman.png" width="128" height="128"/>
+        </figure>
+
         <div>
           <hgroup>
-            <h1>Sign in</h1>
+            <h4><%= user.displayName %></h4>
+            <p><small><%= user.username %></small></p>
           </hgroup>
-          <a href="/login/facebook" role="button">Log In with Facebook</a>
+            
+          <% if (user.emails) { %>
+          <p><small>Email: </small><%= user.emails[0].value %></p>
+          <% } %>
         </div>
-        <div></div>
-      </article>
+
+      </div>
     </main>
 
   </body>
-
 </html>
