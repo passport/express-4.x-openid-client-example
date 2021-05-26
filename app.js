@@ -34,6 +34,14 @@ app.use(require('express-session')({ secret: 'keyboard cat', resave: false, save
 app.use(passport.initialize());
 app.use(passport.session());
 
+/*
+app.use(function(req, res, next) {
+  //console.log(req.cookies);
+  console.log(req.session);
+  next();
+});
+*/
+
 app.use('/', indexRouter);
 app.use('/', authRouter);
 app.use('/myaccount', myaccountRouter);

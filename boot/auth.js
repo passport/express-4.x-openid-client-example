@@ -25,6 +25,7 @@ module.exports = function() {
     },
     function(tokenset, done) {
       var claims = tokenset.claims();
+      
       var user = {};
       user.id = claims.sub;
       user.displayName = claims.name;
@@ -32,7 +33,10 @@ module.exports = function() {
         user.emails = [ { value: claims.email } ];
       }
       
-      return done(null, user);
+      var info = {};
+      info.id_token = tokenset.id_token;
+      
+      return done(null, user, info);
     }));
   
   
