@@ -18,10 +18,21 @@ module.exports = function() {
   });
   
   passport.use('openidconnect', new Strategy({
-      client: client
+      client: client,
+      params: {
+        scope: 'openid profile email'
+      }
     },
-    function() {
-      console.log('OIDC VERIFY!!!');
+    function(tokenset, done) {
+      var claims = tokenset.claims();
+      var user = {};
+      user.id = claims.sub;
+      user.displayName = claims.name;
+      if (claims.email) {
+        user.emails = [ { value: claims.email } ];
+      }
+      
+      return done(null, user);
     }));
   
   
