@@ -1,8 +1,30 @@
 var passport = require('passport');
+const { Issuer, Strategy } = require('openid-client');
 
 
 module.exports = function() {
-    
+  
+  var issuer = new Issuer({
+    issuer: 'https://dev-374819.oktapreview.com',
+    authorization_endpoint: 'https://dev-374819.oktapreview.com/oauth2/v1/authorize',
+    token_endpoint: 'https://dev-374819.oktapreview.com/oauth2/v1/token',
+    jwks_uri: 'https://dev-374819.oktapreview.com/oauth2/v1/keys'
+  });
+  
+  var client = new issuer.Client({
+    client_id: process.env['CLIENT_ID'],
+    client_secret: process.env['CLIENT_SECRET'],
+    redirect_uris: [ 'http://localhost:3000/openidconnect/redirect' ]
+  });
+  
+  passport.use('openidconnect', new Strategy({
+      client: client
+    },
+    function() {
+      console.log('OIDC VERIFY!!!');
+    }));
+  
+  
   // Configure Passport authenticated session persistence.
   //
   // In order to restore authentication state across HTTP requests, Passport needs

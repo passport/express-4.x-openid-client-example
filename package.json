@@ -1,5 +1,5 @@
 {
-  "name": "express-4.x-oidc-example",
+  "name": "express-4.x-openid-client-example",
   "version": "0.0.0",
   "description": "Express 4.x app using Passport for authentication with OpenID Connect.",
   "keywords": [
@@ -9,13 +9,13 @@
   ],
   "author": "Jared Hanson",
   "license": "Unlicense",
-  "homepage": "https://github.com/passport/express-4.x-oidc-example",
+  "homepage": "https://github.com/passport/express-4.x-openid-client-example",
   "repository": {
     "type": "git",
-    "url": "git://github.com/passport/express-4.x-oidc-example.git"
+    "url": "git://github.com/passport/express-4.x-openid-client-example.git"
   },
   "bugs": {
-    "url": "https://github.com/passport/express-4.x-oidc-example/issues"
+    "url": "https://github.com/passport/express-4.x-openid-client-example/issues"
   },
   "scripts": {
     "start": "node ./bin/www"
@@ -29,6 +29,7 @@
     "express": "^4.13.1",
     "express-session": "^1.11.3",
     "morgan": "^1.6.1",
+    "openid-client": "^4.7.4",
     "passport": "^0.4.0"
   }
 }

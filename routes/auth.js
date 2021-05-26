@@ -4,10 +4,10 @@ var passport = require('passport');
 var router = express.Router();
 
 router.get('/login',
-  passport.authenticate('oidc'));
+  passport.authenticate('openidconnect'));
 
-router.get('/return', 
-  passport.authenticate('oidc', { failureRedirect: '/login' }),
+router.get('/openidconnect/redirect',
+  passport.authenticate('openidconnect', { failureRedirect: '/login' }),
   function(req, res) {
     res.redirect('/');
   });
